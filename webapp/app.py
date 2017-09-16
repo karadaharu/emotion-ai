@@ -1,10 +1,11 @@
 from flask import Flask, jsonify
 from sklearn import datasets, svm
+from flask import render_template
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/hello')
 def hello():
     # Load Dataset from scikit-learn.
     digits = datasets.load_digits()
@@ -14,9 +15,9 @@ def hello():
 
     return jsonify({'prediction': repr(prediction)})
 
-@app.route('/about')
+@app.route('/')
 def about():
-    return 'about aaaaaaa'
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
