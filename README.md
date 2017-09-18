@@ -3,7 +3,9 @@
 ## Development
 
 ```
+$ docker-compose build
 $ docker-compose up
+$ sudo docker exec -i -t emotionai_web_1 /bin/bash
 ```
 
 ### Deploy

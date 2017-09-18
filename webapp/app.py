@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from sklearn import datasets, svm
 from flask import render_template
+from instaLooter import InstaLooter
 
 app = Flask(__name__)
 
