@@ -41,10 +41,18 @@ def init_db():
         db.cursor().executescript(f.read())
     db.commit()
 
+def init_records():
+    db = get_db()
+    imgs = os.listdir(os.path.join(app.root_path, 'static/img/'))
+    for img in imgs:
+        db.execute('insert or ignore into votes (filename) values (?)', [img])
+    db.commit()
+
 @app.cli.command('initdb')
 def initdb_command():
     """Initializes the database."""
     init_db()
+    init_records()
     print('Initialized the database.')
 
 @app.route('/hello')
@@ -62,7 +70,6 @@ def about():
     imgs = os.listdir(os.path.join(app.root_path, 'static/img/'))
     img = random.choice(imgs)
     return render_template('index.html', img=img)
-    # return render_template('index.html')
 
 @app.route('/vote', methods=['GET', 'POST'])
 def vote():
