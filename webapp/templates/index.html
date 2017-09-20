@@ -26,11 +26,10 @@
     <h1 class="header center orange-text">Is this やばい？</h1>
     <div class="row center">
       <div class="col s4 offset-s4">
-        <img src="{{ url_for('static', filename='img/a.jpg') }}" class="q-img">
+        <img src="{{ url_for('static', filename='img/' + img ) }}" class="q-img">
       </div>
     </div>
     <div class="row center">
-      <!-- <a href="" id="yes&#45;btn" class="btn&#45;large waves&#45;effect waves&#45;light orange btn&#45;q">やばい</a> -->
       <p id="yes-btn" class="btn-large waves-effect waves-light orange btn-q">やばい</p>
       <p id="no-btn" class="btn-large waves-effect waves-light orange btn-q">Not やばい</p>
     </div>
