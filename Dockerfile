@@ -1,4 +1,4 @@
-FROM heroku/miniconda
+FROM continuumio/miniconda3
 
 # Grab requirements.txt.
 COPY ./webapp/requirements.txt /tmp/requirements.txt

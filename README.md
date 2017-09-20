@@ -3,9 +3,20 @@
 ## Development
 
 ```
-$ docker-compose build
-$ docker-compose up
-$ sudo docker exec -i -t emotionai_web_1 /bin/bash
+$ docker-compose build dev
+$ docker-compose up dev
+```
+
+Log in to shell
+
+```
+$ sudo docker exec -i -t emotionai_dev_1 /bin/bash
+```
+
+Remove unused images
+
+```
+$ docker rmi $(docker images -f "dangling=true" -q)
 ```
 
 ### Deploy
@@ -13,6 +24,8 @@ $ sudo docker exec -i -t emotionai_web_1 /bin/bash
 ```
 $ heroku container:push web
 ```
+
+
 
 
 <!-- Build a Docker image -->
