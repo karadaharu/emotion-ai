@@ -26,12 +26,12 @@
     <h1 class="header center orange-text">Is this やばい？</h1>
     <div class="row center">
       <div class="col s4 offset-s4">
-        <img src="{{ url_for('static', filename='img/' + img ) }}" class="q-img">
+        <img src="{{ url_for('static', filename='img/' + img ) }}" class="q-img" id="q-img" data-img="{{ img }}">
       </div>
     </div>
     <div class="row center">
-      <p id="yes-btn" class="btn-large waves-effect waves-light orange btn-q">やばい</p>
-      <p id="no-btn" class="btn-large waves-effect waves-light orange btn-q">Not やばい</p>
+      <p class="btn-large waves-effect waves-light orange btn-q" data-ans="y">やばい</p>
+      <p class="btn-large waves-effect waves-light orange btn-q" data-ans="n">Not やばい</p>
     </div>
     <br><br>
   </div>

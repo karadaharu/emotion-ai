@@ -1,9 +1,10 @@
 (function($){
   $(function(){
     $('.button-collapse').sideNav();
-    $('.btn-q').click( function () {
-      console.log('click');
-      $.post("/vote", function (result) {
+    $('.btn-q').click( function() {
+      var img = $('#q-img').attr('data-img');
+      var ans = $(this).attr('data-ans');
+      $.post("/vote", {"img":img, "ans":ans}, function (result) {
         console.log(result);
       });
     });

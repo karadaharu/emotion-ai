@@ -1,8 +1,8 @@
-from flask import Flask, jsonify, render_template, g
+from flask import Flask, jsonify, render_template, g, request
 from sklearn import datasets, svm
 from instaLooter import InstaLooter
 import sqlite3
-import os, random
+import os, random, sys
 
 app = Flask(__name__)
 
@@ -48,6 +48,12 @@ def init_records():
         db.execute('insert or ignore into votes (filename) values (?)', [img])
     db.commit()
 
+def query_db(query, args=(), one=False):
+    cur = get_db().execute(query, args)
+    rv = cur.fetchall()
+    cur.close()
+    return (rv[0] if rv else None) if one else rv
+
 @app.cli.command('initdb')
 def initdb_command():
     """Initializes the database."""
@@ -73,9 +79,24 @@ def about():
 
 @app.route('/vote', methods=['GET', 'POST'])
 def vote():
+    if request.method == 'POST':
+        img = request.form['img']
+        print(request.form['ans'], file=sys.stderr)
+        db = get_db()
+        if request.form['ans'] == 'y':
+            db.execute("update votes set yes_count = yes_count+1 where filename = ?", [img])
+        elif request.form['ans'] == 'n':
+            db.execute("update votes set no_count = no_count+1 where filename = ?", [img])
+        db.commit()
+        count = query_db('select * from votes where filename = ?', [img], one=True)
+        print(count['yes_count'], file=sys.stderr)
+        return 'aaa'
+
+        # return count['yes_count']
+    else:
+        return 'aaab'
     # db = get_db()
     # db.execute('insert into votes (filename, count
-    return 'aaaa'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
